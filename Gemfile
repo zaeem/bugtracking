@@ -18,6 +18,7 @@ gem 'devise'
 gem 'bcrypt'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
+gem 'cancancan', '~> 2.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

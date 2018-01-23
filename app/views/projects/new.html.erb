@@ -1,0 +1,17 @@
+
+
+
+<%= form_for @project do |f| %>
+    <div class="form-group row no-padding text-center col-md-12">
+      <div class="col-md-10">
+        <%= f.text_field :project_name, placeholder: "Project Name", autofocus: true,
+                                  class: "form-control input-lg" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.submit class: "btn btn-lg btn-success" %>
+      </div>
+    </div>
+<% end %>
+
+
+<h3>Your Projects</h3>
