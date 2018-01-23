@@ -15,6 +15,10 @@
         <%= f.text_field :name, class: 'form-control' %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :"User Type" %>
+        <%= f.select :user_type, options_for_select([ ["Manager", "Manager"], ["User", "User"], ["QA", "QA"]]) %>
+      </div>
 
       <div class="form-group">
         <%= f.label :password %>
