@@ -1,0 +1,38 @@
+
+<div class= "row">
+    <h4> Project Name :  </h4>
+    <h5> <%= @project.project_name %> </h5>
+</div>
+
+<div class= "row">
+    <h4> Project Description : </h4>
+    <h5> <%= @project.description %> </h5>
+</div>
+
+
+
+<div id="user_lookup">
+<%= form_tag search_users_path, remote: true, method: :get, 
+
+                                                              id: "user-lookup-form" do %>
+  <div class="form-group row no-padding text-center col-md-12">
+    <div class="col-md-10">
+      <%= text_field_tag :user, params[:user], 
+
+                                placeholder: "Search User to add in this project", 
+                                autofocus: true,
+                                class: "form-control search-box input-lg" %>
+    </div>
+    <div class="col-md-2">
+      <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+        <i class="fa fa-search"></i> Search User
+      <% end %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+
+<div id = "results">
+
+</div>

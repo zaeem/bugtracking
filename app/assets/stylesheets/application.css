@@ -15,6 +15,9 @@
  *= require_self
  */
 
+ .textarea.input-lg{
+   height: 250px; 
+ }
  .logout {
     padding-left: 0;
   }
