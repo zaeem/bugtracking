@@ -11,15 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126094800) do
+ActiveRecord::Schema.define(version: 20180126143052) do
 
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
     t.string "description"
   end
 
-# Could not dump table "tasks" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "tasks", force: :cascade do |t|
+    t.string  "title"
+    t.string  "description"
+    t.string  "task_category"
+    t.string  "status"
+    t.integer "creator_id"
+    t.integer "resolver_id"
+    t.integer "project_id"
+  end
+
+  add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id"
+  add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"
+  add_index "tasks", ["resolver_id"], name: "index_tasks_on_resolver_id"
 
   create_table "user_projects", force: :cascade do |t|
     t.integer  "user_id"

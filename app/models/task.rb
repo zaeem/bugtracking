@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
     belongs_to :creator, :class_name => 'User'
     belongs_to :resolver, :class_name => 'User'
 
-    belongs_to :projects
+    belongs_to :projects , :dependent => :destroy
 
     validates :title, presence: true, uniqueness: true
     validates :description, presence: true
