@@ -9,7 +9,7 @@
     <h5> <%= @project.description %> </h5>
 </div>
 
-
+ 
 
 <div id="user_lookup">
 <%= form_tag search_users_path, remote: true, method: :get, 
@@ -17,14 +17,15 @@
                                                               id: "user-lookup-form" do %>
   <div class="form-group row no-padding text-center col-md-12">
     <div class="col-md-10">
-      <%= text_field_tag :user, params[:user], 
+      <%= text_field_tag :user  , params[:user] ,
 
                                 placeholder: "Search User to add in this project", 
                                 autofocus: true,
                                 class: "form-control search-box input-lg" %>
+      <%= hidden_field_tag :project_id , @project.id %>
     </div>
     <div class="col-md-2">
-      <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+      <%= button_tag(type: :submit, class: "btn btn-lg btn-success" ) do %>
         <i class="fa fa-search"></i> Search User
       <% end %>
     </div>
@@ -36,3 +37,45 @@
 <div id = "results">
 
 </div>
+
+
+
+<h3> Existing Users in this Projects </h3>
+
+<% if @count1>0 %>
+
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @existing_users.each do |u| %>
+      <% if u.id != current_user.id %>
+        <tr>
+          <td><%= u.email %></td>
+          <td><%= u.name %></td>
+            <td>
+            <%= link_to "Remove this user from this project", destroy_association_path(user: u.id, 
+            project: @project.id),
+            data: {confirm: "Are you sure?"}, 
+            class: "btn btn-xs btn-danger" %>
+            
+            </td>
+            
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+
+</table>
+
+
+<% else %>
+    <h3> This project has no user </h3>
+<%  end %>

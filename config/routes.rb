@@ -9,10 +9,15 @@ Rails.application.routes.draw do
 
   get 'search_users', to: 'users#search'
 
-  resources :projects
+  resources :projects do 
+    resources :tasks
+  end
 
 
+  
 
+  resources :user_projects 
+  get 'destroy_association' , to: 'user_projects#destroy_association'
   
 
   # Example of regular route:

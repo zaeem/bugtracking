@@ -1,5 +1,11 @@
 class User < ActiveRecord::Base
-  has_many :projects
+
+  has_many :user_projects, :dependent => :destroy
+  has_many :projects, through: :user_projects
+
+  has_many :owned_tasks, :class_name => 'Task', :foreign_key => 'creator_id'
+  has_many :resolved_tasks, :class_name => 'Task', :foreign_key => 'resolver_id'
+
   before_save { self.email = email.downcase }
   validates :name, presence: true
   validates :user_type, presence: true
@@ -7,7 +13,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
 
 
         def self.search(param)

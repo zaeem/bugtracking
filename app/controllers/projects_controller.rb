@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+    
 
     def index
         @user = current_user
@@ -12,9 +13,12 @@ class ProjectsController < ApplicationController
 
     def create
         @project = Project.new(project_params)
-        @project.user_id = current_user.id
         
         if @project.save
+            @user_project = UserProject.new
+            @user_project.user_id = current_user.id
+            @user_project.project_id = @project.id
+            @user_project.save
             flash[:success] = "Sucessfully Created #{@project.project_name}"
             redirect_to action: "index"
         else      
@@ -25,24 +29,14 @@ class ProjectsController < ApplicationController
 
     def destroy
         @project = Project.find(params[:id])
-        if(@project.user_id = current_user.id)
-            @project.delete
-            flash[:success] = "Sucessfully deleted #{@project.project_name}"
-            redirect_to action: "index"
-        else
-            flash[:danger] = "You Don't have right to delete #{@project.project_name}"
-            redirect_to action: "index"
-        end
+        Project.find(@project).destroy
+        flash[:success] = "Sucessfully deleted #{@project.project_name}"
+        redirect_to action: "index"
     end
 
     def edit
 
         @project = Project.find(params[:id])
-
-        if(@project.user_id != current_user.id)
-            flash[:danger] = "you don't have permission to change #{@project.project_name}"
-            redirect_to action: "index"
-        end
     end
 
     def update
@@ -61,12 +55,19 @@ class ProjectsController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
-        @users = User.all
+        @existing_users = @project.users
+        @count1 = @existing_users.count
+        if @count1>0
+            @existing_users.reject {|u| u.id == current_user.id}
+            @count1 = @count1 -1
+        end
+
+
     end
 
 
     
     def project_params
-        params.require(:project).permit(:project_name , :description, current_user) 
+        params.require(:project).permit(:project_name , :description) 
     end
 end

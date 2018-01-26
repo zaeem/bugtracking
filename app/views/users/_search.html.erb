@@ -1,6 +1,49 @@
 
-  <% @users.each  do |u| %>
-    
-    <%=    u.email %>
-    
-  <% end %>
+<div class="row">
+  <div class="col-lg-9">
+    <%= bootstrap_flash %>
+  </div>
+</div>
+
+<% if @users %>
+
+  <table class="table table-striped">
+  
+    <thead>
+        <tr>
+            <th>Users</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |u| %>
+        <% if u.id != current_user.id %>
+
+          <tr>
+            <td><%= u.email %></td>
+            <td>
+                <% if !is_already_added(u.email , @project_id)%>
+                  
+                      <%= link_to "Add to this project", user_projects_path(user: u.id, 
+                                                        project: @project_id),
+                                                        class: "btn btn-xs btn-success", 
+                                                        method: :post %>
+                  
+                <%else%>
+                      <P>Already Added </p> 
+                <% end %>
+            </td>
+          </tr>
+          
+        <% end%>
+      <% end %>
+    </tbody>
+
+
+  </table>
+
+<% end %>
+
+
+

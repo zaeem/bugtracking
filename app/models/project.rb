@@ -1,10 +1,15 @@
 class Project < ActiveRecord::Base
 
-    belongs_to :user
+    has_many :user_projects, :dependent => :destroy
+    has_many :users, through: :user_projects
+
+    has_many :tasks, :dependent => :destroy
 
     validates :project_name, presence: true, uniqueness: true
-    validates :user_id, presence: true
     validates :description, presence: true
+
 
   end
   
+
+
