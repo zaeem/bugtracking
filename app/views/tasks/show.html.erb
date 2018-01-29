@@ -3,7 +3,7 @@
 
 <div class= "row">
     <label>Image</label>
-    <%= image_tag(@task.avatar_url)  %>
+    <img src= <%= @task.avatar_url.to_s %> alt="rss feed" height="200" width="300"/>
 </div>
 
 

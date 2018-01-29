@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   end
 
 
-  
 
   resources :user_projects 
   get 'destroy_association' , to: 'user_projects#destroy_association'

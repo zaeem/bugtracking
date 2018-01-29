@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
 
+  
      
     belongs_to :creator, :class_name => 'User'
     belongs_to :resolver, :class_name => 'User'
@@ -12,5 +13,6 @@ class Task < ActiveRecord::Base
     validates :creator_id, presence: true
     validates :resolver_id, presence: true
     validates :project_id, presence: true
+
     mount_uploader :avatar, AvatarUploader 
   end

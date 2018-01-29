@@ -53,8 +53,10 @@ class TasksController < ApplicationController
         @task.resolver_id = @resolver.id
         @task.avatar = params[:avatar]
 
-        puts "ell\n"
-        puts params[:file]
+        puts "hellon\n"*12
+        puts @task.avatar_url
+        puts params[:avatar]
+        puts "hellon\n"*12
 
         if @task.save
             if !UserProject.where(user_id: @resolver.id, project_id: @project.id).first
@@ -146,6 +148,10 @@ class TasksController < ApplicationController
             redirect_to action: "index"
         end
         @project = Project.find(params[:project_id])
+        puts "hellon\n"*12
+        puts @task.avatar_url.to_s
+        puts "hellon\n"*12
+        
         @task = Task.find(params[:id])
     end
 

@@ -1,6 +1,6 @@
 
 
-<%= form_tag url_for(action: 'create'), method: "post" do %>
+<%= form_tag url_for(action: 'create'), multipart: true  ,method: "post" do %>
 
     <div class="form-group row no-padding text-center col-md-12">
       
@@ -29,9 +29,8 @@
 
       <div class="form-group">
             <%= label_tag :Image %>
-            <%= file_field_tag "avatar"  %>
+            <%= file_field_tag 'avatar'  %>
       </div>
-
 
 
 
