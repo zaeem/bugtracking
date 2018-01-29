@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126143052) do
+ActiveRecord::Schema.define(version: 20180128133921) do
 
   create_table "projects", force: :cascade do |t|
-    t.string "project_name"
-    t.string "description"
+    t.string  "project_name"
+    t.string  "description"
+    t.integer "creator_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180126143052) do
     t.integer "creator_id"
     t.integer "resolver_id"
     t.integer "project_id"
+    t.string  "avatar"
   end
 
   add_index "tasks", ["creator_id"], name: "index_tasks_on_creator_id"

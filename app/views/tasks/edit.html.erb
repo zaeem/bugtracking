@@ -1,0 +1,104 @@
+
+<% if !is_developer %> 
+
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+
+    <div class="form-group row no-padding text-center col-md-12">
+      
+        <%= text_field_tag 'title' , @task.title , placeholder: "Task Title", autofocus: true,
+                                  class: "form-control input-lg" %>      
+    </div>
+
+    <div class="form-group row no-padding text-center col-md-12">
+
+        <%= text_area_tag 'description' , @task.description , placeholder: "Task Description", autofocus: false,
+                                  class: "form-control input-lg textarea" %>      
+    </div>
+
+    <div class="form-group">
+        <%= label_tag :"Task Type :  " %>
+        <%= @task.task_category %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :"Resolver :  " %>
+        <%= @resolver.name%>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :"Status :  " %>
+        <%= @task.status%>
+      </div>
+
+      <% if @task.task_category == "Featured" %>
+
+            <div class="form-group">
+                <%= label_tag :"Select New Status" %>
+                <%= select_tag :task_status, options_for_select([ ["New", "New"], ["Started", "Started"], ["Completed", "Completed"]]) %>
+            </div>
+
+      <%else%>
+
+            <div class="form-group">
+                <%= label_tag :"Select New Status" %>
+                <%= select_tag :task_status, options_for_select([ ["New", "New"], ["Started", "Started"], ["Resolved", "Resolved"]]) %>
+            </div>
+
+       <% end %>
+
+      <div class="row">
+      <div class="col-md-2 ">
+          <%= link_to "Back to Tasks", project_tasks_path(@project), class: "button btn btn-lg btn-success" %>
+      </div>
+
+      <div class = "col-md-7">
+      </div>
+
+      <div class = "col-md-2">
+          <%= submit_tag "Update Task", class: "button btn btn-lg btn-success" %>
+      </div>
+  </div>
+
+<% end %>
+
+
+<% else %>
+
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+
+        <div class="form-group">
+            <%= label_tag :"Current Status :  " %>
+            <%= @task.status%>
+        </div>
+
+        <% if @task.task_category == "Featured" %>
+
+                <div class="form-group">
+                    <%= label_tag :"Select New Status" %>
+                    <%= select_tag :task_status, options_for_select([ ["New", "New"], ["Started", "Started"], ["Completed", "Completed"]]) %>
+                </div>
+
+        <%else%>
+
+                <div class="form-group">
+                    <%= label_tag :"Select New Status" %>
+                    <%= select_tag :task_status, options_for_select([ ["New", "New"], ["Started", "Started"], ["Resolved", "Resolved"]]) %>
+                </div>
+
+        <% end %>
+
+        <div class="row">
+        <div class="col-md-2 ">
+            <%= link_to "Back to Tasks", project_tasks_path(@project), class: "button btn btn-lg btn-success" %>
+        </div>
+
+        <div class = "col-md-7">
+        </div>
+
+        <div class = "col-md-2">
+            <%= submit_tag "Update Task", class: "button btn btn-lg btn-success" %>
+        </div>
+
+      <% end %>
+
+<% end %>

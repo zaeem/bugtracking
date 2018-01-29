@@ -18,7 +18,7 @@
   <div class="form-group row no-padding text-center col-md-12">
     <div class="col-md-10">
       <%= text_field_tag :user  , params[:user] ,
-
+ 
                                 placeholder: "Search User to add in this project", 
                                 autofocus: true,
                                 class: "form-control search-box input-lg" %>
@@ -40,9 +40,10 @@
 
 
 
-<h3> Existing Users in this Projects </h3>
+
 
 <% if @count1>0 %>
+<h3> Existing Users in this Projects </h3>
 
 <table class="table table-striped">
 
@@ -50,16 +51,18 @@
     <tr>
       <th>Email</th>
       <th>Name</th>
+      <th>Role</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @existing_users.each do |u| %>
-      <% if u.id != current_user.id %>
+      <% if u.id != current_user.id && u.user_type!="Developer"%>
         <tr>
           <td><%= u.email %></td>
           <td><%= u.name %></td>
+          <td><%= u.user_type %></td>
             <td>
             <%= link_to "Remove this user from this project", destroy_association_path(user: u.id, 
             project: @project.id),
@@ -79,3 +82,8 @@
 <% else %>
     <h3> This project has no user </h3>
 <%  end %>
+<div class="row">
+        <div class="col-md-2 ">
+            <%= link_to "Back to Projects", projects_path, class: "button btn btn-lg btn-success" %>
+        </div>
+        </div> 

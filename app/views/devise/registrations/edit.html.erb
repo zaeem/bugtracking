@@ -16,8 +16,8 @@
       </div>
 
       <div class="form-group">
-      <%= f.label :"User Type" %>
-      <%= f.select :user_type, options_for_select([ ["Manager", "Manager"], ["User", "User"], ["QA", "QA"]]) %>
+      <%= f.label :"User Type : " %>
+      <%= current_user.user_type %>
     </div>
       
       <div class="form-group">

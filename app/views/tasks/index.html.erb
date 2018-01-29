@@ -1,3 +1,66 @@
-<h3> Tasks of <%= @project.project_name %> </h3>
+<h3> Tasks of <%= @project.project_name %> Project </h3>
 
-<%= link_to "Add new Task!", new_project_task_path(@project), class: "button btn btn-lg btn-success" %>
+<% if is_manager || is_qa %>
+    <%= link_to "Add new Task!", new_project_task_path(@project), class: "button btn btn-lg btn-success" %>
+<% end %>
+
+<% if @count>0 %>
+
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Created By</th>
+        <th>Assigned to</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @tasks.each do |t| %>
+        <tr>
+          <td><%= t.title %></td>
+          <td><%= t.status %></td>
+          <td><%= t.creator.email %></td>
+          <td><%= t.resolver.email %></td>
+          <td>
+        
+            <% if (is_manager || is_qa) %>
+
+                <%= link_to "Delete this Task", project_task_path(@project,t), 
+                          method: :delete,
+                          data: {confirm: "Are you sure?"}, 
+                          class: "btn btn-xs btn-danger" %>
+
+                <%= link_to "Edit this Task", edit_project_task_path(@project,t),
+                      class: "btn btn-xs btn-success" %>
+            <% else %>
+
+                <%= link_to "Update Status", edit_project_task_path(@project,t),
+                      class: "btn btn-xs btn-success" %>
+            <% end %>      
+
+                <%= link_to "View Detail", project_task_path(@project,t),
+                          class: "btn btn-xs btn-success" %>
+
+          </td>
+            
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<% else %>
+    <h3> This project has no task yet</h3>
+<%  end %>
+
+
+<div class="row">
+        <div class="col-md-2 ">
+            <%= link_to "Back to Projects", projects_path, class: "button btn btn-lg btn-success" %>
+        </div>
+</div>

@@ -20,10 +20,24 @@
         <%= select_tag "task_category" , options_for_select([ ["Bug", "Bug"], ["Featured", "Featured"]]) %>
       </div>
 
+      <div class="form-group">
+        <%= label_tag :"Available Developers" %>
+        <%= select_tag "developer" , options_for_select( @developer_array ) %>
+      </div>
+
+
+
+      <div class="form-group">
+            <%= label_tag :Image %>
+            <%= file_field_tag "avatar"  %>
+      </div>
+
+
+
 
       <div class="row">
       <div class="col-md-2 ">
-          <%= link_to "Back to Tasks", projects_path, class: "button btn btn-lg btn-success" %>
+          <%= link_to "Back to Tasks", project_tasks_path(@project), class: "button btn btn-lg btn-success" %>
       </div>
 
       <div class = "col-md-7">

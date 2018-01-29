@@ -1,0 +1,54 @@
+
+
+
+<div class= "row">
+    <label>Image</label>
+    <%= image_tag(@task.avatar_url)  %>
+</div>
+
+
+<div class= "row">
+    <h3> <%= @task.title %> </h3>
+</div>
+
+<div class= "row">
+    <div class = "col-md-4">
+        <h4>  Description: </h4>
+    </div>
+    <h5> <%= @task.description %> </h5>
+</div>
+
+<div class= "row">
+    <div class = "col-md-4">
+        <h4>  Creator: </h4>
+    </div>
+    <h5> <%= @task.creator.name %> </h5>
+</div>
+
+<div class= "row">
+    <div class = "col-md-4">
+        <h4>  Resolver: </h4>
+    </div>
+    <h5> <%= @task.resolver.name %> </h5>
+</div>
+
+<div class= "row">
+    <div class = "col-md-4">
+        <h4>  Status: </h4>
+    </div>
+    <h5> <%= @task.status %> </h5>
+</div>
+
+<div class= "row">
+    <div class = "col-md-4">
+        <h4>  Type: </h4>
+    </div>
+    <h5> <%= @task.task_category %> </h5>
+</div>
+
+
+<div class="row">
+      <div class="col-md-2 ">
+          <%= link_to "Back to Tasks", project_tasks_path(@project), class: "button btn btn-lg btn-success" %>
+      </div>
+</div>

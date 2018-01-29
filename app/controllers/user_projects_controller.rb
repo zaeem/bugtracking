@@ -17,5 +17,5 @@ class UserProjectsController < ApplicationController
         flash[:success] = "User is removed from this project successfully"
         redirect_to project_path(@project)
     end
-      
+       
 end

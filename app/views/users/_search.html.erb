@@ -12,16 +12,18 @@
     <thead>
         <tr>
             <th>Users</th>
+            <th>Roles</th>
             <th>Actions</th>
         </tr>
     </thead>
 
     <tbody>
       <% @users.each do |u| %>
-        <% if u.id != current_user.id %>
+        <% if u.id != current_user.id && (u.user_type!="Manager" && u.user_type!="Developer") %>
 
           <tr>
             <td><%= u.email %></td>
+            <td><%= u.user_type %></td>
             <td>
                 <% if !is_already_added(u.email , @project_id)%>
                   
